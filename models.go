@@ -934,8 +934,7 @@ func (p *AuthorizationParameters) FormData() map[string]string {
 }
 
 // AuthorizationResponse represents the response to an authorization request.
-type AuthorizationResponse struct {
-}
+type AuthorizationResponse struct{}
 
 // TokenOptions represents the options to obtain a token
 type TokenOptions struct {
@@ -1455,6 +1454,24 @@ func prettyStringStruct(t interface{}) string {
 	return string(json)
 }
 
+type Domain struct {
+	Name     *string `json:"name,omitempty"`
+	Verified *bool   `json:"verified,omitempty"`
+}
+
+type Organization struct {
+	Id                *string              `json:"id,omitempty"`
+	Name              *string              `json:"name,omitempty"`
+	Alias             *string              `json:"alias,omitempty"`
+	Enable            *bool                `json:"enabled,omitempty"`
+	Description       *string              `json:"description,omitempty"`
+	RedirectUrl       *string              `json:"redirectUrl,omitempty"`
+	Attributes        *map[string][]string `json:"attributes,omitempty"`
+	Domains           *[]Domain            `json:"domains,omitempty"`
+	Members           *[]string            `json:"members,omitempty"`
+	IdentityProviders *[]string            `json:"identityProviders,omitempty"`
+}
+
 // Stringer implementations for all struct types
 func (v *CertResponseKey) String() string                           { return prettyStringStruct(v) }
 func (v *CertResponse) String() string                              { return prettyStringStruct(v) }
@@ -1539,3 +1556,5 @@ func (v *CredentialRepresentation) String() string                  { return pre
 func (v *RequiredActionProviderRepresentation) String() string      { return prettyStringStruct(v) }
 func (v *BruteForceStatus) String() string                          { return prettyStringStruct(v) }
 func (v *GetClientUserSessionsParams) String() string               { return prettyStringStruct(v) }
+func (v *Domain) String() string                                    { return prettyStringStruct(v) }
+func (v *Organization) String() string                              { return prettyStringStruct(v) }

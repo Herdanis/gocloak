@@ -4507,3 +4507,34 @@ func (g *GoCloak) GetUsersManagementPermissions(ctx context.Context, accessToken
 
 	return &result, nil
 }
+
+// CreateOrganization creates a new Organization
+func (g *GoCloak) CreateOrganization(ctx context.Context, token, realm string, organization Organization) (string, error) {
+	const errMessage = "could not create organization"
+
+	resp, err := g.GetRequestWithBearerAuth(ctx, token).
+		SetBody(organization).
+		Post(g.getAdminRealmURL(realm, "organizations"))
+
+	if err := checkForError(resp, err, errMessage); err != nil {
+		return "", err
+	}
+
+	return getID(resp), nil
+}
+
+// GetOrganization returns a list of the organization
+func (g *GoCloak) GetOrganization(ctx context.Context, token, realm string) ([]*Organization, error) {
+	const errMessage = "could not get organization"
+
+	var result []*Organization
+
+	resp, err := g.GetRequestWithBearerAuth(ctx, token).
+		SetResult(&result).
+		Get(g.getAdminRealmURL(realm, "organizations"))
+	if err := checkForError(resp, err, errMessage); err != nil {
+		return nil, err
+	}
+
+	return result, nil
+}
