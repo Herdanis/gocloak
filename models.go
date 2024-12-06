@@ -1455,16 +1455,16 @@ func prettyStringStruct(t interface{}) string {
 }
 
 type Organization struct {
-	Id                *string            `json:"id:omitempty"`
-	Name              *string            `json:"name:omitempty"`
-	Alias             *string            `json:"alias:omitempty"`
-	Enable            *bool              `json:"enabled:omitempty"`
-	Description       *string            `json:"description:omitempty"`
-	RedirectUrl       *string            `json:"redirectUrl:omitempty"`
-	Attributes        *map[string]string `json:"attributes:omitempty"`
-	Domain            *[]string          `json:"domains:omitempty"`
-	Member            *[]string          `json:"member:omitempty"`
-	IdentityProviders *[]string          `json:"identityProviders:omitempty"`
+	Id                *string            `json:"id,omitempty"`
+	Name              *string            `json:"name,omitempty"`
+	Alias             *string            `json:"alias,omitempty"`
+	Enable            *bool              `json:"enabled,omitempty"`
+	Description       *string            `json:"description,omitempty"`
+	RedirectUrl       *string            `json:"redirectUrl,omitempty"`
+	Attributes        *map[string]string `json:"attributes,omitempty"`
+	Domain            *[]string          `json:"domains,omitempty"`
+	Member            *[]string          `json:"member,omitempty"`
+	IdentityProviders *[]string          `json:"identityProviders,omitempty"`
 }
 
 // Stringer implementations for all struct types
