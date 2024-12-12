@@ -4538,3 +4538,16 @@ func (g *GoCloak) GetOrganization(ctx context.Context, token, realm string) ([]*
 
 	return result, nil
 }
+
+func (g *GoCloak) AddUserToOrganization(ctx context.Context, token, realm, idOfUser, idOfOrganization string) error {
+	const errMessage = "could not add user to organization"
+
+	resp, err := g.GetRequestWithBearerAuth(ctx, token).
+		SetBody(idOfUser).
+		Post(g.getAdminRealmURL(realm, "organizations", idOfOrganization, "members"))
+
+	if err := checkForError(resp, err, errMessage); err != nil {
+		return err
+	}
+	return nil
+}
